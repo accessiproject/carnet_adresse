@@ -165,7 +165,7 @@ class Entity {
 	 * @param string $cle		: Nom de la clÃ© primaire
 	 * @param integer $id		: id de l'enregistrement
 	 */
-	static function supprimer($table,$cle,$id) {
+	static function delete($table,$cle,$id) {
 		$sql="delete from $table where $cle=:id";
 		$statement = self::$link->prepare($sql);
 		$statement->bindValue(":id",$id,PDO::PARAM_INT);
@@ -174,14 +174,14 @@ class Entity {
 	}
 	
 	/**
-	* Fonction générique générant une liste déroulante à partir d'une requete
+	* Fonction gï¿½nï¿½rique gï¿½nï¿½rant une liste dï¿½roulante ï¿½ partir d'une requete
 	* $sql = "select id, label from table"
 	*/
 	function HTMLselect($sql,$selectionid)
 	{	
 		$resultat = self::$link->query($sql);
 		$s="";				
-		//parcours du résultat de la requete par ligne 
+		//parcours du rï¿½sultat de la requete par ligne 
 		foreach($resultat as $row)
 		{
 			$row=array_map("mhe",$row);

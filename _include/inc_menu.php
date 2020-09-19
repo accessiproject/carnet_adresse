@@ -2,14 +2,22 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="sr-only">Afficher le menu</span> <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="index.php">&nbsp;</a>
+      <a class="navbar-brand" href="#">&nbsp;</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">        
+      <ul class="nav navbar-nav">
+        <li><a href="/">Accueil</a></li>
+        <li><a href='<?=hlien("contact","index")?>'>Contact</a></li>
+<li><a href='<?=hlien("user","index")?>'>Compte utilisateur</a></li>
+
+	  </ul>
+      <ul class="nav navbar-nav navbar-right">
+		<li><a href="<?=hlien("authentification","deconnexion")?>">Déconnexion</a></li>
+		<li><a href='<?=hlien("authentification","connexion")?>'>Connexion</a></li>
       </ul>
     </div>
   </div>
