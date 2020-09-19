@@ -12,7 +12,7 @@ class Ctr_contact extends Ctr_controleur {
     }
 
 	function a_index() {
-		$result=Contact::selectAll("contact");
+		$result=Contact::requestToListContacts();
 		require $this->gabarit;
 	}
 	

@@ -3,6 +3,14 @@ class Contact extends Entity {
 	public function __construct($id=0) {
 		parent::__construct("contact", "contact_id",$id);
 	}
+
+	/*
+		request to list contacts
+	*/
+	static function requestToListContacts() {
+		$sql="select * from contact,user where contact_user=user_id";
+		return self::$link->query($sql);
+	}
 	
 	//list contacts of a user
 	static function requestToShowContactsOfOneUser($user_id) {

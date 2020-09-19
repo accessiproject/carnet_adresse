@@ -18,7 +18,7 @@
 				<?= mhe($row['contact_photo']) ?>
 			</td>
 			<td><?= mhe($row['contact_description']) ?></td>
-			<td><?= mhe($row['contact_user']) ?></td>
+			<td><?= mhe($row['user_firstname']) ?> <?= mhe($row['user_lastname']) ?></td>
 			<td><a class="btn btn-info" href="<?= hlien("contact", "show", "id", $row["contact_id"]) ?>">Voir</a></td>
 			<td><a class="btn btn-info" href="<?= hlien("contact", "edit", "id", $row["contact_id"]) ?>">Modifier</a></td>
 			<td><a class="btn btn-danger" href="<?= hlien("contact", "del", "id", $row["contact_id"]) ?>">Supprimer</a></td>
