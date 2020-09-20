@@ -1,6 +1,7 @@
 <?php
 
-require "./include/inc_config.php";
+require "config.php";
+
 
 $faker = Faker\Factory::create('fr_FR');
 
@@ -23,7 +24,7 @@ for ($i = 1; $i <= $nbusers; $i++) {
 }
 
 //Insertion of contacts
-$sql = "insert into contact values (null,:contact_lastname,:contact_firstname,:contact_photo,:contact_description,:contact_birth,:contact_postaladdress,:contact_email,:contact_telephone,:contact_mobile,:contact_createdat,:contact_user)";
+$sql = "insert into contact values (null,:contact_lastname,:contact_firstname,:contact_photo,:contact_description,:contact_birth,:contact_postaladdress,:contact_postalcode,:contact_city,:contact_email,:contact_telephone,:contact_mobile,:contact_createdat,:contact_user)";
 $statement = $link->prepare($sql);
 for ($i = 1; $i <= $nbusers; $i++) {
 	for ($j = 1; $j <= 5; $j++) {
@@ -35,7 +36,9 @@ for ($i = 1; $i <= $nbusers; $i++) {
 		$statement->bindValue(":contact_photo", "kevin", PDO::PARAM_STR);
 		$statement->bindValue(":contact_description", $faker->text, PDO::PARAM_STR);
 		$statement->bindValue(":contact_birth", date("Y-m-d H:i:s"), PDO::PARAM_STR);
-		$statement->bindValue(":contact_postaladdress", $faker->address, PDO::PARAM_STR);
+		$statement->bindValue(":contact_postaladdress", $faker->streetAddress, PDO::PARAM_STR);
+		$statement->bindValue(":contact_postalcode", $faker->postcode, PDO::PARAM_INT);
+		$statement->bindValue(":contact_city", $faker->city, PDO::PARAM_STR);
 		$statement->bindValue(":contact_email", $email, PDO::PARAM_STR);
 		$statement->bindValue(":contact_telephone", $faker->e164PhoneNumber, PDO::PARAM_STR);
 		$statement->bindValue(":contact_mobile", $faker->e164PhoneNumber, PDO::PARAM_STR);

@@ -1,4 +1,5 @@
 <?php
+
 /**	inc_config.php est inclus sur toutes les pages du site **/
 session_start();
 //Pour afficher les jours et mois en français

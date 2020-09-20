@@ -3,6 +3,6 @@
 		<a href="<?=hlien("accueil","index")?>"><img src="_images/logo.jpg" width="50"></a>
 	</div>
     <div>
-        <h1>Framework</h1>
+        Framework
     </div>    
 </div>

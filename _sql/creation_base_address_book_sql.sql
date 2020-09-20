@@ -31,6 +31,8 @@ create table contact (
 	contact_description TEXT,
 	contact_birth DATE,
 	contact_postaladdress VARCHAR(200),
+	contact_postalcode INT,
+	contact_city VARCHAR(50),
 	contact_email VARCHAR(100),
 	contact_telephone VARCHAR(100),
 	contact_mobile VARCHAR(100),
