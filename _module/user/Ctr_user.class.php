@@ -16,11 +16,6 @@ class Ctr_user extends Ctr_controleur {
 		require $this->gabarit;
 	}
 	
-	function a_showContactsOfOneUser() {
-		$result=User::requestToShowContactsOfOneUser($_GET["id"]);
-		require $this->gabarit;
-	}
-	
 	//$_GET["id"] : id de l'enregistrement
 	function a_edit() {
 		$id = isset($_GET["id"]) ? $_GET["id"] : 0;
@@ -32,11 +27,9 @@ class Ctr_user extends Ctr_controleur {
 	//$_POST : enregistrement à sauver
 	function a_save() {
 		if (isset($_POST["btSubmit"])) {
+			$_POST["user_password"]=password_hash($_POST["user_password"], PASSWORD_DEFAULT);
 			$u=new User();
-
-			if ($id==0)
 			$_POST["user_createdat"]=date("Y-m-d H:i:s");
-			
 			$u->chargerDepuisTableau($_POST);
 			$u->sauver();
 		}

@@ -4,8 +4,8 @@ require_once '../vendor/autoload.php';
 
 /** Les constantes **/
 define("DB_SERVER","localhost");
-define("DB_USER","kevin");
-define("DB_PWD","kevin");
+define("DB_USER","root");
+define("DB_PWD","");
 define("DB_BDD","database_address_book");
 
 //connexion à la base de données

@@ -9,16 +9,24 @@
       <a class="navbar-brand" href="#">&nbsp;</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Accueil</a></li>
-        <li><a href='<?=hlien("contact","index")?>'>Contact</a></li>
-<li><a href='<?=hlien("user","index")?>'>Compte utilisateur</a></li>
-
-	  </ul>
-      <ul class="nav navbar-nav navbar-right">
-		<li><a href="<?=hlien("authentification","deconnexion")?>">Déconnexion</a></li>
-		<li><a href='<?=hlien("authentification","connexion")?>'>Connexion</a></li>
-      </ul>
+      <?php if(!isset($_SESSION["user_role"])=="anonyme") { ?>
+          <ul class="nav navbar-nav">
+            <li><a href='<?=hlien("accueil","index")?>'>Accueil</a></li>
+            <li><a href='<?=hlien("user","index")?>'>Compte utilisateur</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href='<?=hlien("authentification","index")?>'>Connexion</a></li>
+          </ul>
+      <?php } else if($_SESSION["user_role"]=="admin") { ?>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Accueil</a></li>
+          <li><a href='<?=hlien("contact","index")?>'>Contact</a></li>
+          <li><a href='<?=hlien("user","index")?>'>Compte utilisateur</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="<?=hlien("authentification","deconnexion")?>">Déconnexion</a></li>
+        </ul>
+      <?php } ?>
     </div>
   </div>
 </nav>

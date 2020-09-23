@@ -4,12 +4,12 @@
 ?>
 <form method="post" action="<?php echo hlien("authentification","index")?>">			
 	<div class="form-group row">
-		<div class="col-md-2"><label for="uti_login">login : </label></div>
-		<div class="col-md-6"><input type="text" id="uti_login" name="uti_login"></div>
+		<div class="col-md-2"><label for="user_email">Mail : </label></div>
+		<div class="col-md-6"><input type="text" id="user_email" name="user_email"></div>
 	</div>						
 	<div class="form-group row">
-		<div class="col-md-2"><label for="uti_mdp">Mot de passe : </label></div>
-		<div class="col-md-6"><input type="password" id="uti_mdp" name="uti_mdp"></div>
+		<div class="col-md-2"><label for="user_password">Mot de passe : </label></div>
+		<div class="col-md-6"><input type="password" id="user_password" name="user_password"></div>
 	</div>						
 	<div class="form-group row">
 		<input class="btn btn-success" type="submit" value="Enregistrer" name="btSubmit" >&nbsp;

@@ -12,11 +12,18 @@ class Ctr_authentification extends Ctr_controleur {
 		if (isset($_POST["btSubmit"]))
 		{
 			extract($_POST);
-			if ( $row=Utilisateur::verification($uti_login,$uti_mdp) ) {		
-				$_SESSION["uti_id"]=$row["uti_id"];
-				$_SESSION["uti_login"]=$row["uti_login"];
-				$_SESSION["uti_profil"]=$row["uti_profil"];
-				header("location:" . hlien("accueil","index"));
+			
+			if ( $row=User::verification($user_email) ) {	
+				
+				if (password_verify($_POST['user_password'],  $row["user_password"])) {		
+					$_SESSION["user_id"]=$row["user_id"];
+					$_SESSION["user_email"]=$row["user_email"];
+					$_SESSION["user_role"]="admin";
+					//$_SESSION["user_profil"]=$row["user_profil"];
+					header("location:" . hlien("accueil","index"));
+				} 
+				else
+					header("location:" . hlien("authentification","index","para",1));
 			} 
 			else
 				header("location:" . hlien("authentification","index","para",1));		
@@ -27,7 +34,7 @@ class Ctr_authentification extends Ctr_controleur {
 	
 	function a_deconnexion()
 	{
-		unset($_SESSION["uti_id"]);
+		unset($_SESSION["user_id"]);
 		session_destroy();
 		header("location:" . hlien("authentification","index"));
 	}
