@@ -13,7 +13,40 @@ class Ctr_user extends Ctr_controleur {
 
 	function a_index() {
 		$result=User::selectAll("user");
+		$resultprofil=User::requestToListRolesAmongUsers();
 		require $this->gabarit;
+	}
+	
+	function a_show() {
+		extract($_GET);
+		$orderby = $idsortcriteria . " " . $idorder;
+		if ($idprofiluser!="user_role")
+			$idprofiluser= "'" . $idprofiluser . "'";
+		$result=User::requestToShowUsers($idprofiluser,$orderby);
+		$tab=$result->fetchAll(PDO::FETCH_ASSOC);
+		$x=array();
+		for ($i=0;$i<count($tab);$i++) {
+			$x[$i]["user_id"]["label"]="N° de référence";
+			$x[$i]["user_id"]["value"]=$tab[$i]["user_id"];
+			$x[$i]["user_firstname"]["label"]="Prénom";
+			$x[$i]["user_firstname"]["value"]=$tab[$i]["user_firstname"];
+			$x[$i]["user_lastname"]["label"]="Nom";
+			$x[$i]["user_lastname"]["value"]=$tab[$i]["user_lastname"];
+			$x[$i]["user_username"]["label"]="Nom d'utilisateur";
+			$x[$i]["user_username"]["value"]=$tab[$i]["user_username"];
+			$x[$i]["user_email"]["label"]="Adresse email";
+			$x[$i]["user_email"]["value"]=$tab[$i]["user_email"];
+			$x[$i]["user_role"]["label"]="Rôle";
+			$x[$i]["user_role"]["value"]=$tab[$i]["user_role"];
+			$x[$i]["user_createdat"]["label"]="Date de création";
+			$x[$i]["user_createdat"]["value"]=$tab[$i]["user_createdat"];
+			$x[$i]["href_edit"]["label"]="Modifier";
+			$x[$i]["href_edit"]["value"]='<a class="btn btn-warning" href="' . hlien("user", "edit", "id", $tab[$i]["user_id"]) . '">Modifier</a>';
+			$x[$i]["href_delete"]["label"]="Supprimer";
+			$x[$i]["href_delete"]["value"]='<a class="btn btn-warning" href="' . hlien("user", "delete", "id", $tab[$i]["user_id"]) . '">Supprimer</a>';
+		}
+		$json=json_encode($x, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		echo $json;
 	}
 	
 	//$_GET["id"] : id de l'enregistrement

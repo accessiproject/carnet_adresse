@@ -6,20 +6,15 @@ class Ctr_authentification extends Ctr_controleur {
         $this->$a();
     }
 	
-	function a_index()
-	{		
+	function a_index() {
 		//traitement du formulaire
-		if (isset($_POST["btSubmit"]))
-		{
+		if (isset($_POST["btSubmit"])) {
 			extract($_POST);
-			
-			if ( $row=User::verification($user_email) ) {	
-				
-				if (password_verify($_POST['user_password'],  $row["user_password"])) {		
+			if ( $row=User::verification($user_email) ) {
+				if (password_verify($_POST['user_password'],  $row["user_password"])) {
 					$_SESSION["user_id"]=$row["user_id"];
 					$_SESSION["user_email"]=$row["user_email"];
-					$_SESSION["user_role"]="admin";
-					//$_SESSION["user_profil"]=$row["user_profil"];
+					$_SESSION["user_role"]=$row["user_role"];
 					header("location:" . hlien("accueil","index"));
 				} 
 				else

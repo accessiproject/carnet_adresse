@@ -1,46 +1,27 @@
+<div id="resultat"></div>
 <h1>Gestion des comptes utilisateurs</h1>
 <p><a class="btn btn-warning" href="<?= hlien("user", "edit", "id", 0) ?>">Créer un nouveau compte utilisateur</a></p>
-<table class="table table-striped table-bordered table-hover">
-	<tr>
-		<th>N° référence</th>
-		<th>Nom</th>
-		<th>Prénom</th>
-		<th>Adresse email</th>
-		<th>Nom d'utilisateur</th>
-		<th>Profil</th>
-		<th>Date de création</th>
-		<th>Contact</th>
-		<th>Modifier</th>
-		<th>Supprimer</th>
-	</tr>
-	<?php
-	foreach ($result as $row) {
-		extract($row); ?>
-		<tr>
-			<td><?= mhe($row['user_id']) ?></td>
-			<td><?= mhe($row['user_lastname']) ?></td>
-			<td><?= mhe($row['user_firstname']) ?></td>
-			<td><?= mhe($row['user_email']) ?></td>
-			<td><?= mhe($row['user_username']) ?></td>
-			<td><?= mhe($row['user_role']) ?></td>
-			<td><?= date_format(date_create($row['user_createdat']), "d/m/Y à H:i") ?></td>
-			<td>
-				<?php 
-				$resultNumberOfContacts=Contact::requestToCountContactsForOneUser($row["user_id"]);
-				foreach ($resultNumberOfContacts as $numberOfContacts) {
-					if ($numberOfContacts['numberofcontacts']!=0)
-						echo '<a class="btn btn-info" href="' . hlien("contact", "show", "id", $row["user_id"]) . '">Voir (' . $numberOfContacts['numberofcontacts'] . ')</a>';
-					else
-						echo "Aucun contact enregistré.";
-				}
-				?>
-			</td>
-			<td><a class="btn btn-info" href="<?= hlien("user", "edit", "id", $row["user_id"]) ?>">Modifier</a></td>
-			<td><a class="btn btn-danger" href="<?= hlien("user", "deleteOneUser", "id", $row["user_id"]) ?>">Supprimer</a></td>
-		</tr>
-	<?php } ?>
-</table>
-<script src="_js/test.js"></script>
+<div>
+	<select aria-label="Trier par" id="idsortcriteria" onchange="show()">
+		<option value="user_id">N° référence</option>
+		<option value="user_firstname">Prénom</option>
+		<option value="user_lastname">Nom</option>
+		<option value="user_username">Nom d'utilisateur</option>
+	</select>
+	<select aria-label="Ordre" id="idorder" onchange="show()">
+		<option value="asc">Croissant</option>
+		<option value="desc">Décroissant</option>
+	</select>
+	<select aria-label="Filtrer par profil" id="idprofiluser" onchange="show()">
+		<option value="user_role">Tous</option>
+		<?php
+		foreach($resultprofil as $profil)
+			echo '<option value="' . $profil['role'] . '">' . $profil['role'] . '</option>'; ?>
+	</select>
+</div>
+<button id="idBtnShow">Afficher les informations en mode tableau</button>
+<div id="divlist" style="display:inline"></div>
+<div id="divtable" style="display:none"></div>
 <script>
 
 //fonction pour initialiser l'appel ajax
@@ -55,27 +36,77 @@ function getXmlhttp() {
 
 function show() {
 	var xmlhttp;
-	//récupération de la date de début et de la date de fin
-	let fin = date_fin.value + " " + heure_fin.value
-	let debut = date_debut.value + " " + heure_debut.value
-	//calcul de la durée (en heures) d'une location à partir des deux dates récupérées
-	date1 = new Date(debut)
-	date2 = new Date(fin)
-	var diffEnMilliseconde = date2-date1
-	var diffEnHeures = ((date2-date1)/1000)/3600
-	//creation du paramètre
-	var para="cat="+loc_categorie.value + "&" + "nbh=" + diffEnHeures;
+	var para= "idsortcriteria=" + idsortcriteria.value + "&idorder=" + idorder.value + "&idprofiluser=" + idprofiluser.value;
+	console.log(para);
 	xmlhttp= getXmlhttp();
-	xmlhttp.open("GET","http://kevin/locacar/www/index.php?m=location&a=ajaxcalcultarif&" + para,true);
+	xmlhttp.open("GET","http://localhost/addressBook/www/index.php?m=user&a=show&" + para,true);
 	xmlhttp.onreadystatechange=mafonction;
 	xmlhttp.send();
 	
 	function mafonction() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("resultatprixhorsoption").innerHTML += xmlhttp.responseText;
-			tarif=xmlhttp.responseText;
+			let result = xmlhttp.responseText;
+			result = JSON.parse(result);
+			show_list(result);
+			show_table(result);
 		}
 	}
 }
+
+show();
+
+function show_table(array) {
+	divtable.innerHTML="";
+	let table = document.createElement("table");
+	let tr = document.createElement("tr");
+	for (let field in array[0]) {
+		tr.innerHTML+="<th scope='col'>" + array[0][field]["label"] + "</th>";
+	}
+	table.appendChild(tr);
+	//divtable.appendChild(table);
+	tbody = document.createElement("tbody");
+	for (let i = 0; i < array.length; i++) {
+		tr = document.createElement("tr");
+		for (field in array[i]) {
+			if (idsortcriteria.value==field)
+				tr.innerHTML+="<th scope='row'>" + array[i][field]["value"] + "</th>";
+			else
+				tr.innerHTML += "<td>" + array[i][field]["value"] + "</td>";
+		}
+		tbody.appendChild(tr);
+	}
+	table.appendChild(tbody);
+	divtable.appendChild(table);
+}
+
+function show_list(array) {
+	divlist.innerHTML="";
+	for (let i=0;i<array.length;i++) {
+		divlist.innerHTML+="<h1>" + array[i][idsortcriteria.value]["label"] + " : " + array[i][idsortcriteria.value]["value"] + "</h1><ul>";
+		for (let field in array[i]) {
+			if (field.includes("href_")==false)
+				divlist.innerHTML+="<li>" + array[i][field]["label"] + " : " + array[i][field]["value"] + "</li>";
+			else
+				divlist.innerHTML+="<li>" + array[i][field]["value"] + "</li>";
+		}
+	}
+	divlist.innerHTML+="</ul>";
+}
+
+function show_object() {
+	let list = document.getElementById("divlist");
+	let table = document.getElementById("divtable");
+	if (list.style.display=="inline") {
+		table.style.display="inline";
+		list.style.display="none";
+		idBtnShow.innerHTML="Afficher les informations en mode liste";
+	} else {
+		table.style.display="none";
+		list.style.display="inline";
+		idBtnShow.innerHTML="Afficher les informations en mode tableau";
+	}
+}
+
+idBtnShow.addEventListener("click",()=>show_object());
 
 </script>

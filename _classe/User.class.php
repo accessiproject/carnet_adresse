@@ -3,13 +3,19 @@ class User extends Entity {
 	public function __construct($id=0) {
 		parent::__construct("user", "user_id",$id);
 	}
-
-	//show users
-	static function requestToShowUsers($param) {
-		$sql="select * from user order by $param";
+	
+//request to list of roles among of users
+	static function requestToListRolesAmongUsers() {
+		$sql="select user_role role from user group by user_role";
 		return self::$link->query($sql);
 	}
-
+	
+	//show users
+	static function requestToShowUsers($profil,$orderby) {
+		$sql="select * from user where user_role=$profil order by $orderby";
+		return self::$link->query($sql);
+	}
+	
 	static function verification($user_email) {
 		$sql="select * from user where user_email=?";
 		$statement = self::$link->prepare($sql);
