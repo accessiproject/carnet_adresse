@@ -15,8 +15,10 @@
 	<select aria-label="Filtrer par profil" id="idprofiluser" onchange="show()">
 		<option value="user_role">Tous</option>
 		<?php
+		
 		foreach($resultprofil as $profil)
-			echo '<option value="' . $profil['role'] . '">' . $profil['role'] . '</option>'; ?>
+			echo '<option value="' . $profil['user_role'] . '">' . $profil['user_role'] . '</option>';
+			?>
 	</select>
 </div>
 <button id="idBtnShow">Afficher les informations en mode tableau</button>

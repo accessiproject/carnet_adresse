@@ -5,8 +5,8 @@ class User extends Entity {
 	}
 	
 //request to list of roles among of users
-	static function requestToListRolesAmongUsers() {
-		$sql="select user_role role from user group by user_role";
+	static function requestToGroupByRoleUser() {
+		$sql="select user_role from user group by user_role";
 		return self::$link->query($sql);
 	}
 	
