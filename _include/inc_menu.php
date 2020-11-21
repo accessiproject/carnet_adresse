@@ -16,10 +16,10 @@
 				<a href='<?=hlien("member","showprofil")?>'>Mon profil</a>
 			</li>
 			<li>
-				<a href='<?=hlien("member","showcontacts")?>'>Mes contacts</a>
+				<a href='<?=hlien("member","indexcontact")?>'>Mes contacts</a>
 			</li>
 			<li>
-				<a href='<?=hlien("member","searchcontact")?>'>Rechercher un contact</a>
+				<a href='<?=hlien("member","editcontact","id",0)?>'>Ajouter un contact</a>
 			</li>
           </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -28,8 +28,8 @@
       <?php } else if($_SESSION["user_role"]=="admin") { ?>
         <ul class="nav navbar-nav">
           <li><a href="/">Accueil</a></li>
-          <li><a href='<?=hlien("contact","index")?>'>Contact</a></li>
-          <li><a href='<?=hlien("user","index")?>'>Compte utilisateur</a></li>
+          <li><a href='<?=hlien("contact","contactindex")?>'>Contact</a></li>
+          <li><a href='<?=hlien("user","userindex")?>'>Compte utilisateur</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="<?=hlien("authentification","deconnexion")?>">Déconnexion</a></li>

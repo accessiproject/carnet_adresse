@@ -10,13 +10,14 @@ date_default_timezone_set('Europe/Paris');
 /** Les constantes **/
 define("SITE_NOM","Carnet d'adresses");
 define("DB_SERVER","localhost");
-define("DB_USER","root");
-define("DB_PWD","");
+define("DB_USER","kevin");
+define("DB_PWD","kevin");
 define("DB_BDD","database_address_book");
 
 require "../_include/inc_fonction.php";
 require "../_include/_classe/Entity.class.php";
 require "../_include/_classe/Ctr_controleur.class.php";
+require "../vendor/autoload.php";
 
 spl_autoload_register('monAutoLoad');
 
