@@ -61,3 +61,18 @@ nav li a:hover {
 .espace {
 	margin-left: 50%;
 }
+
+.centrer {
+	margin-top: 40px;
+	text-align: center;
+	text-decoration: underline;
+	color: blue;
+	border-width:1px;
+	border-style:dotted;
+	border-color:black;
+	box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+h1 {
+	text-align: center;
+}

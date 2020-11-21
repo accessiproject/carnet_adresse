@@ -15,6 +15,7 @@ class Ctr_authentification extends Ctr_controleur {
 					$_SESSION["user_id"]=$row["user_id"];
 					$_SESSION["user_email"]=$row["user_email"];
 					$_SESSION["user_role"]=$row["user_role"];
+					$_SESSION["user_firstname"]=$row["user_firstname"];
 					header("location:" . hlien("accueil","index"));
 				} 
 				else

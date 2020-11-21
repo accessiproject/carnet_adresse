@@ -1,2 +1,1 @@
-﻿<?php var_dump($_SESSION); ?>
-<H1>Bonjour !!!</H1>
+﻿<H1>Bonjour <strong><?php echo $_SESSION["user_firstname"] ?></strong></H1>

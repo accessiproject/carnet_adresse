@@ -54,20 +54,21 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "iamdual/uploader",
-            "version": "v0.2.4",
+            "version": "v0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iamdual/uploader.git",
-                "reference": "0ed4396dc7400198e2b01d01bdb2ba8627e7cbfc"
+                "reference": "86d795d0fcc97b7ce5f1a727282cdb1117d59067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iamdual/uploader/zipball/0ed4396dc7400198e2b01d01bdb2ba8627e7cbfc",
-                "reference": "0ed4396dc7400198e2b01d01bdb2ba8627e7cbfc",
+                "url": "https://api.github.com/repos/iamdual/uploader/zipball/86d795d0fcc97b7ce5f1a727282cdb1117d59067",
+                "reference": "86d795d0fcc97b7ce5f1a727282cdb1117d59067",
                 "shasum": ""
             },
             "require": {
@@ -94,11 +95,7 @@
             ],
             "description": "Safe, simple and useful file upload class for PHP.",
             "homepage": "https://github.com/iamdual/uploader",
-            "support": {
-                "issues": "https://github.com/iamdual/uploader/issues",
-                "source": "https://github.com/iamdual/uploader/tree/v0.2.4"
-            },
-            "time": "2020-09-17T22:20:58+00:00"
+            "time": "2020-11-06T21:40:12+00:00"
         }
     ],
     "packages-dev": [],
@@ -108,6 +105,5 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "platform-dev": []
 }

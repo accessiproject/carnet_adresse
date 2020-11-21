@@ -27,7 +27,7 @@
         </ul>
       <?php } else if($_SESSION["user_role"]=="admin") { ?>
         <ul class="nav navbar-nav">
-          <li><a href="/">Accueil</a></li>
+          <li><a href="<?=hlien("accueil","index")?>">Accueil</a></li>
           <li><a href='<?=hlien("contact","contactindex")?>'>Contact</a></li>
           <li><a href='<?=hlien("user","userindex")?>'>Compte utilisateur</a></li>
         </ul>

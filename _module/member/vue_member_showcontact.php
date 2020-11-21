@@ -1,6 +1,7 @@
 <h1>Contact n°<?=mhe($contact_id)?></h1>
+
 <ul>
-	<li>Nnom : <?=mhe($contact_lastname)?></li>
+	<li>Nom : <?=mhe($contact_lastname)?></li>
 	<li>Prénom : <?=mhe($contact_firstname)?></li>
 	<li>Description : <?=mhe($contact_description ? $contact_description : "Non renseigné")?></li>
 	<li>Adresse postale : <?=mhe($contact_postaladdress ? $contact_postaladdress : "Non renseigné")?></li>

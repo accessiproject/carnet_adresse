@@ -14,7 +14,7 @@
 					<th scope="row"><?=mhe($row['contact_lastname'])?> <?= mhe($row['contact_firstname'])?></th>
 					<td><?=mhe($row['contact_description'])?></td>
 					<td><a class="btn btn-info" href="<?=hlien("member","showcontact","id",$row["contact_id"])?>">Voir</a></td>
-					<td><a class="btn btn-info" href="<?=hlien("member","editcontact","id",$row["contact_id"])?>">Modifier</a></td>
+					<td><a class="btn btn-warning" href="<?=hlien("member","editcontact","id",$row["contact_id"])?>">Modifier</a></td>
 					<td><a class="btn btn-danger" href="<?=hlien("member","deletecontact","id",$row["contact_id"])?>">Supprimer</a></td>
 				</tr>
 				<?php } else { ?>
